@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowly — Automate your team's busywork</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0b0d17;--panel:#131629;--line:#232744;--text:#e8eaf6;--muted:#9097b8;--a:#7c5cff;--b:#22d3ee}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .glow{position:absolute;width:700px;height:700px;border-radius:50%;filter:blur(120px);opacity:.35;z-index:-1}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+  .logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--a),var(--b))}
+  nav ul{display:flex;gap:32px;list-style:none;color:var(--muted);font-size:15px;font-weight:500}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:15px}
+  .btn-p{background:linear-gradient(135deg,var(--a),#9b7bff);box-shadow:0 10px 30px -10px var(--a)}
+  .btn-g{border:1px solid var(--line);background:rgba(255,255,255,.03)}
+  .hero{text-align:center;padding:70px 0 40px;position:relative}
+  .pill{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel);padding:7px 14px 7px 7px;border-radius:999px;font-size:14px;color:var(--muted);margin-bottom:28px}
+  .pill b{background:var(--a);color:#fff;padding:3px 10px;border-radius:999px;font-size:12px}
+  h1{font-size:76px;font-weight:800;letter-spacing:-.035em;line-height:1.02;max-width:900px;margin:0 auto 24px}
+  h1 span{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:20px;color:var(--muted);max-width:620px;margin:0 auto 36px}
+  .cta{display:flex;justify-content:center;gap:14px;margin-bottom:18px}
+  .note{color:var(--muted);font-size:13px}
+  .app{margin:60px auto 0;max-width:1040px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#161a33,#0f1224);padding:14px;box-shadow:0 40px 100px -30px rgba(124,92,255,.45)}
+  .bar{display:flex;gap:7px;padding:6px 8px 14px}
+  .bar i{width:11px;height:11px;border-radius:50%;background:#2c3155}
+  .screen{display:grid;grid-template-columns:200px 1fr;gap:14px;text-align:left}
+  .side{background:var(--panel);border-radius:14px;padding:18px;font-size:14px;color:var(--muted)}
+  .side div{padding:9px 12px;border-radius:9px;margin-bottom:4px}
+  .side .on{background:rgba(124,92,255,.15);color:#fff}
+  .main{display:grid;gap:14px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .kpi{background:var(--panel);border-radius:14px;padding:18px}
+  .kpi small{color:var(--muted);font-size:13px}
+  .kpi b{display:block;font-size:28px;margin-top:4px}
+  .kpi em{font-style:normal;color:#4ade80;font-size:13px}
+  .chart{background:var(--panel);border-radius:14px;padding:18px;height:220px;position:relative}
+  .chart svg{position:absolute;left:18px;right:18px;bottom:18px;width:calc(100% - 36px);height:160px}
+  .logos{display:flex;justify-content:center;gap:56px;padding:70px 0 30px;color:#5b6189;font-weight:800;font-size:22px;letter-spacing:-.02em;flex-wrap:wrap}
+  section{padding:100px 0}
+  .sh{text-align:center;max-width:680px;margin:0 auto 60px}
+  .sh small{color:var(--b);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+  .sh h2{font-size:50px;letter-spacing:-.03em;line-height:1.1;margin:12px 0 16px}
+  .sh p{color:var(--muted);font-size:18px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .f{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;transition:.25s}
+  .f:hover{border-color:var(--a);transform:translateY(-4px)}
+  .f .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:22px;margin-bottom:20px;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(34,211,238,.15))}
+  .f h3{font-size:20px;margin-bottom:8px}
+  .f p{color:var(--muted);font-size:15px}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .plan{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:34px;display:flex;flex-direction:column}
+  .plan.pop{border:1.5px solid var(--a);background:linear-gradient(180deg,rgba(124,92,255,.14),var(--panel) 60%);position:relative}
+  .plan.pop:before{content:"Most popular";position:absolute;top:-13px;left:34px;background:var(--a);font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px}
+  .plan h3{font-size:18px;color:var(--muted);font-weight:600}
+  .price{font-size:52px;font-weight:800;letter-spacing:-.03em;margin:10px 0 4px}
+  .price small{font-size:16px;color:var(--muted);font-weight:500}
+  .plan ul{list-style:none;margin:24px 0 30px;flex:1}
+  .plan li{padding:8px 0;color:#c9cdea;font-size:15px}
+  .plan li:before{content:"✓";color:var(--b);margin-right:10px;font-weight:700}
+  .plan .btn{justify-content:center}
+  .final{background:linear-gradient(135deg,#2a1f6b,#0f3b52);border-radius:30px;padding:80px;text-align:center;position:relative;overflow:hidden}
+  .final h2{font-size:52px;letter-spacing:-.03em;margin-bottom:14px}
+  .final p{color:#c3c8ea;font-size:18px;margin-bottom:32px}
+  footer{display:flex;justify-content:space-between;padding:50px 0;color:var(--muted);font-size:14px}
+  @media(max-width:900px){h1{font-size:46px}.grid,.plans,.kpis{grid-template-columns:1fr}.screen{grid-template-columns:1fr}.side{display:none}nav ul{display:none}.final{padding:44px}.sh h2,.final h2{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="glow" style="background:var(--a);top:-300px;left:-200px"></div>
+<div class="glow" style="background:var(--b);top:100px;right:-300px"></div>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#"><i></i>Flowly</a>
+    <ul><li>Product</li><li>Integrations</li><li>Pricing</li><li>Customers</li></ul>
+    <div style="display:flex;gap:10px"><a class="btn btn-g" href="#">Log in</a><a class="btn btn-p" href="#">Start free</a></div>
+  </nav>
+
+  <header class="hero">
+    <div class="pill"><b>New</b> AI workflow builder is live →</div>
+    <h1>Automate the busywork. <span>Ship the real work.</span></h1>
+    <p>Flowly connects your tools and runs repetitive tasks on autopilot, so your team saves 10+ hours every week.</p>
+    <div class="cta"><a class="btn btn-p" href="#">Start free trial →</a><a class="btn btn-g" href="#">▶ Watch 2-min demo</a></div>
+    <div class="note">No credit card required · 14-day free trial · Cancel anytime</div>
+
+    <div class="app">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="screen">
+        <div class="side"><div class="on">⚡ Workflows</div><div>📊 Analytics</div><div>🔌 Integrations</div><div>👥 Team</div><div>⚙️ Settings</div></div>
+        <div class="main">
+          <div class="kpis">
+            <div class="kpi"><small>Tasks automated</small><b>48,213</b><em>▲ 23% this month</em></div>
+            <div class="kpi"><small>Hours saved</small><b>1,284</b><em>▲ 18% this month</em></div>
+            <div class="kpi"><small>Active workflows</small><b>76</b><em>▲ 9 new</em></div>
+          </div>
+          <div class="chart"><small style="color:var(--muted)">Automations per day</small>
+            <svg viewBox="0 0 600 160" preserveAspectRatio="none"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff" stop-opacity=".5"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0"/></linearGradient></defs><path d="M0 130 C60 120 90 100 140 105 S230 70 280 80 360 40 420 50 520 20 600 15 V160 H0Z" fill="url(#g)"/><path d="M0 130 C60 120 90 100 140 105 S230 70 280 80 360 40 420 50 520 20 600 15" stroke="#9b7bff" stroke-width="3" fill="none"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="logos"><span>NORTHWIND</span><span>Lumen</span><span>◆ Vertex</span><span>acme.io</span><span>Orbital</span></div>
+</div>
+
+<section><div class="wrap">
+  <div class="sh"><small>Features</small><h2>Everything you need to put work on autopilot</h2><p>Build workflows visually or describe them in plain English. Flowly handles the rest.</p></div>
+  <div class="grid">
+    <div class="f"><div class="ic">🤖</div><h3>AI workflow builder</h3><p>Type “when a deal closes, create an invoice and notify finance” and it's done.</p></div>
+    <div class="f"><div class="ic">🔌</div><h3>300+ integrations</h3><p>Slack, HubSpot, Notion, Stripe, Google Workspace and every tool your team uses.</p></div>
+    <div class="f"><div class="ic">📈</div><h3>Real-time analytics</h3><p>See exactly how many hours and dollars each automation saves your team.</p></div>
+    <div class="f"><div class="ic">🛡️</div><h3>Enterprise security</h3><p>SOC 2 Type II, SSO, audit logs and granular role-based permissions.</p></div>
+    <div class="f"><div class="ic">⚡</div><h3>Instant triggers</h3><p>Webhooks fire in under 100ms, so nothing ever waits in a queue.</p></div>
+    <div class="f"><div class="ic">🤝</div><h3>Built for teams</h3><p>Share, comment on and version workflows together, just like docs.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="sh"><small>Pricing</small><h2>Simple pricing that scales with you</h2></div>
+  <div class="plans">
+    <div class="plan"><h3>Starter</h3><div class="price">$0<small>/mo</small></div><p style="color:var(--muted)">For individuals trying it out.</p><ul><li>5 active workflows</li><li>1,000 tasks / month</li><li>Core integrations</li></ul><a class="btn btn-g" href="#">Get started</a></div>
+    <div class="plan pop"><h3>Pro</h3><div class="price">$29<small>/user/mo</small></div><p style="color:var(--muted)">For growing teams.</p><ul><li>Unlimited workflows</li><li>50,000 tasks / month</li><li>AI workflow builder</li><li>Priority support</li></ul><a class="btn btn-p" href="#">Start free trial</a></div>
+    <div class="plan"><h3>Enterprise</h3><div class="price">Custom</div><p style="color:var(--muted)">For large organizations.</p><ul><li>Unlimited everything</li><li>SSO &amp; audit logs</li><li>Dedicated success manager</li></ul><a class="btn btn-g" href="#">Contact sales</a></div>
+  </div>
+</div></section>
+
+<div class="wrap">
+  <div class="final"><h2>Give your team their time back.</h2><p>Join 4,000+ teams automating with Flowly.</p><a class="btn btn-p" href="#" style="background:#fff;color:#0b0d17">Start free trial →</a></div>
+  <footer><span>© 2026 Flowly Inc.</span><span>Privacy · Terms · Status</span></footer>
+</div>
+<a href="https://www.upwork.com/freelancers/~011d30ba4386bdbcf8" target="_blank" rel="noopener" style="position:fixed;right:16px;bottom:16px;z-index:9999;background:#14a800;color:#fff;font:600 13px/1.2 system-ui,sans-serif;padding:10px 16px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);text-decoration:none">Design concept by Ziya C. &middot; Hire me on Upwork &rarr;</a>
+</body>
+</html>
